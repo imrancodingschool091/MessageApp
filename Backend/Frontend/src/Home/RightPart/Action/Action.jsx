@@ -7,7 +7,7 @@ function Action() {
     <div className="container h-[10vh]" >
         <div className="infoAndStaus">
             <h1 style={{color:"darkgray",fontSize:"1.5rem",fontFamily:"Poppins"}}>Vikash</h1>
-            <p>Online</p>
+            <p style={{color:"green"}}>Online</p>
         </div>
         <div className="actions">
             <MdAddCall className="text-blue-700 text-3xl cursor-pointer hover:bg-slate-800 rounded-full "/>
