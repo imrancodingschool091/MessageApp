@@ -20,7 +20,7 @@ function Login() {
     };
 
     try {
-      const response = await axios.post("https://messageapp-k7nn.onrender.com/login", UserInfo);
+      const response = await axios.post("https://messageapp-k7nn.onrender.com", UserInfo);
 
       if (response) {
         toast.success(response.data.message,{

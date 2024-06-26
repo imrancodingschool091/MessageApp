@@ -26,7 +26,7 @@ function Signup() {
 
     try {
 
-      let response= await axios.post("https://messageapp-k7nn.onrender.com/signup",UserInfo)
+      let response= await axios.post("https://messageapp-k7nn.onrender.com",UserInfo)
 
       if (response) {
         toast.success(response.data.message,{
