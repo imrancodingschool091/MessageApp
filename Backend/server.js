@@ -1,29 +1,20 @@
-import express from "express"
-import dotenv from "dotenv"
-import cors from "cors"
-import mongoose from "mongoose"
-import Router from "./Routes/user.route.js"
-import path from "path"
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import mongoose from "mongoose";
+import Router from "./Routes/user.route.js";
+import path from "path";
 
+const app = express();
+dotenv.config();
 
+// Middleware
+app.use(express.json());
+app.use(cors());
 
-const app=express()
-dotenv.config()
+const PORT = process.env.PORT || 8080;
 
-
-//middleware
-
-app.use(express.json())
-app.use(cors())
-
-
-const PORT=process.env.PORT ||8080
-
-
-
-//database connction code..
-
-
+// Database connection
 const URI = process.env.MONGO_URI;
 
 const connectDB = async () => {
@@ -42,29 +33,19 @@ const connectDB = async () => {
 // Call the database connection function
 connectDB();
 
-
-
-
-
-//Routes
-
-app.use("/user",Router)
-
+// Routes
+app.use("/user", Router);
 
 // Deployment code
 if (process.env.NODE_ENV === "production") {
-    const __dirname = path.resolve();
-    app.use(express.static(path.join(__dirname, "Frontend", "dist")));
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "Frontend", "dist", "index.html"));
-    });
+  const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, "Frontend", "dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "Frontend", "dist", "index.html"));
+  });
 }
 
-
-
-
-
-app.listen(PORT,()=>{
-
-    console.log(`the app is listning on port :${PORT}`)
-})
+app.listen(PORT, () => {
+  console.log(`The app is listening on port :${PORT}`);
+});

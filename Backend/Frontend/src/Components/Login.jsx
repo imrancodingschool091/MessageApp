@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -13,30 +14,28 @@ function Login() {
 
   const onSubmit = async (data) => {
     const UserInfo = {
+     
       email: data.email,
       password: data.password,
     };
 
     try {
-      // Use the environment variable correctly
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/user/login`,
-        UserInfo
-      );
+      const response = await axios.post("http://localhost:4001/user/login", UserInfo);
 
-      if (response.data.success) {
-        toast.success(response.data.message, {
-          position: "top-center",
-        });
-        localStorage.setItem("SChatApp", JSON.stringify(response.data.user));
+      if (response) {
+        toast.success(response.data.message,{
+          position:"top-center"
+        })
+        localStorage.setItem("SChatApp",JSON.stringify(response.data.user))
         
         setTimeout(() => {
-          window.location.reload();
+          window.location.reload()
+          
         }, 1000);
       } else {
-        toast.warning("Invalid login credentials", {
-          position: "top-center",
-        });
+        toast.warning("Invalid login credentials",{
+          position:"top-center"
+        })
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -48,42 +47,35 @@ function Login() {
   };
 
   return (
-    <div
-      className="auth-container"
-      style={{
-        backgroundColor: "rgb(13, 12, 12)",
-        width: "100%",
-        height: "100vh",
-      }}
-    >
+    <div className="auth-container"  style={{
+      backgroundColor: " rgb(13, 12, 12)",
+      width: "100%",
+      height: "100vh",
+    }}>
       <form onSubmit={handleSubmit(onSubmit)} className="auth-form">
         <h1>Login Form</h1>
+
+       
 
         <input
           type="email"
           placeholder="Email"
           {...register("email", { required: "Email is required" })}
         />
-        {errors.email && (
-          <span className="text-red-600">{errors.email.message}</span>
-        )}
+        {errors.email && <span className="text-red-600">{errors.email.message}</span>}
 
         <input
           type="password"
           placeholder="Password"
           {...register("password", { required: "Password is required" })}
         />
-        {errors.password && (
-          <span className="text-red-600">{errors.password.message}</span>
-        )}
+        {errors.password && <span className="text-red-600">{errors.password.message}</span>}
 
         <button type="submit">Login</button>
 
         <div className="message">
           <p>Don't have an account?</p>
-          <span>
-            <Link to="/signup">Signup</Link>
-          </span>
+          <span><Link to={'/signup'}>Signup</Link></span>
         </div>
       </form>
     </div>
