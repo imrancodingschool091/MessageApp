@@ -1,7 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
-import { databaseConnection } from "./DB/connection.js"
+import mongoose from "mongoose"
 import Router from "./Routes/user.route.js"
 import path from "path"
 
@@ -19,7 +19,32 @@ app.use(cors())
 
 const PORT=process.env.PORT ||8080
 
-databaseConnection()
+
+
+//database connction code..
+
+
+const URI = process.env.MONGO_URI;
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+    process.exit(1); // Exit process with failure
+  }
+};
+
+// Call the database connection function
+connectDB();
+
+
+
+
 
 //Routes
 
