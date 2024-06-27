@@ -20,7 +20,7 @@ function Login() {
     };
 
     try {
-      const response = await axios.post("http://localhost:4001/user/login", UserInfo);
+      const response = await axios.post("process.env.REACT_APP_API_URL || 'http://localhost:4001", UserInfo);
 
       if (response) {
         toast.success(response.data.message,{

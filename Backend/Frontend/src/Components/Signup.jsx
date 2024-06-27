@@ -26,7 +26,7 @@ function Signup() {
 
     try {
 
-      let response= await axios.post("http://localhost:4001/user/signup",UserInfo)
+      let response= await axios.post("process.env.REACT_APP_API_URL || 'http://localhost:4001",UserInfo)
 
       if (response) {
         toast.success(response.data.message,{
