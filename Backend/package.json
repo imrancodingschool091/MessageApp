@@ -1,13 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Backend server for ChatApp project",
-  "main": "server.js",
+  "description": "",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js", // Changed to use 'node' directly
-    "dev": "nodemon server.js", // For development with nodemon
-    "build": "npm install && npm install --prefix Frontend && npm run build --prefix Frontend" // Assuming you build frontend with npm
+   "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "npm install && npm install --prefix Frontend && npm run build --prefix Frontend"
   },
   "keywords": [],
   "author": "",
